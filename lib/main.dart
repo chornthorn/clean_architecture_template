@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:clean_architecture_templates/view/blocs/bloc_observer.dart';
+import 'injection/container_injection.dart' as di;
+import 'index.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Clean Architecture',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Clean Architecture  Template'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Starter project'),
-          ),
-        ),
-      ),
-    );
-  }
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
+  Bloc.observer = AppBlocObserver();
+  runApp(AppIndex());
 }

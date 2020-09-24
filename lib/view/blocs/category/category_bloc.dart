@@ -5,13 +5,8 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../core/errors/failure.dart';
-import '../../../core/usecases/usecase.dart';
-import '../../../domain/entities/category_entity.dart';
-import '../../../domain/entities/category_save_req_entity.dart';
-import '../../../domain/entities/category_save_res_entity.dart';
-import '../../../domain/usecases/category/get_category_list_usecase.dart';
-import '../../../domain/usecases/category/save_category_usecase.dart';
+import '../../../core/core.dart';
+import '../../../domain/domain.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';

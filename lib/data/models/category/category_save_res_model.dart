@@ -1,4 +1,4 @@
-import 'package:clean_architecture_templates/domain/entities/category_save_res_entity.dart';
+import '../../../domain/domain.dart';
 
 class CategorySaveResModel extends CategorySaveResEntity {
   CategorySaveResModel({

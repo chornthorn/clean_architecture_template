@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:clean_architecture_templates/view/blocs/category/category_bloc.dart';
-import 'package:clean_architecture_templates/view/pages/category/category_page.dart';
-
 import 'injection/container_injection.dart';
+import 'view/blocs/category/category_bloc.dart';
+import 'view/pages/category/category_page.dart';
 
 class AppIndex extends StatelessWidget {
   @override

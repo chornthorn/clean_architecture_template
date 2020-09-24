@@ -1,13 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:clean_architecture_templates/core/errors/exception.dart';
-import 'package:clean_architecture_templates/core/errors/failure.dart';
-import 'package:clean_architecture_templates/data/datasources/remote/category_remote_data_source.dart';
-import 'package:clean_architecture_templates/data/models/category/category_save_req_model.dart';
-import 'package:clean_architecture_templates/domain/entities/category_entity.dart';
-import 'package:clean_architecture_templates/domain/entities/category_save_req_entity.dart';
-import 'package:clean_architecture_templates/domain/entities/category_save_res_entity.dart';
-import 'package:clean_architecture_templates/domain/repositories/category_repository.dart';
+
+import '../../core/core.dart';
+import '../../domain/domain.dart';
+import '../datasources/datasources.dart';
+import '../models/models.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository {
   final CategoryRemoteDataSource categoryRemoteDataSource;

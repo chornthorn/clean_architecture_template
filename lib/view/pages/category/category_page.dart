@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:clean_architecture_templates/injection/container_injection.dart';
-import 'package:clean_architecture_templates/view/blocs/category/category_bloc.dart';
 
+import '../../../injection/container_injection.dart';
+import '../../blocs/category/category_bloc.dart';
 import 'category_form.dart';
 
 class CategoryPage extends StatelessWidget {

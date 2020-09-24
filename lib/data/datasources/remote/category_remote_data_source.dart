@@ -1,13 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
-import 'package:clean_architecture_templates/core/networks/http.dart';
-import 'package:clean_architecture_templates/core/utils/path.dart';
-import 'package:clean_architecture_templates/data/models/category/category_result_model.dart';
-import 'package:clean_architecture_templates/data/models/category/category_save_req_model.dart';
-import 'package:clean_architecture_templates/data/models/category/category_save_res_model.dart';
-import 'package:clean_architecture_templates/domain/entities/category_entity.dart';
-import 'package:clean_architecture_templates/domain/entities/category_save_res_entity.dart';
+import '../../../core/core.dart';
+import '../../../domain/domain.dart';
+import '../../models/models.dart';
 
 abstract class CategoryRemoteDataSource {
   Future<List<CategoryEntity>> getCategoryList();

@@ -4,17 +4,16 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:clean_architecture_templates/core/errors/failure.dart';
-import 'package:clean_architecture_templates/core/usecases/usecase.dart';
-import 'package:clean_architecture_templates/data/models/category/category_save_req_model.dart';
-import 'package:clean_architecture_templates/domain/entities/category_entity.dart';
-import 'package:clean_architecture_templates/domain/entities/category_save_req_entity.dart';
-import 'package:clean_architecture_templates/domain/entities/category_save_res_entity.dart';
-import 'package:clean_architecture_templates/domain/usecases/category/get_category_list_usecase.dart';
-import 'package:clean_architecture_templates/domain/usecases/category/save_category_usecase.dart';
+
+import '../../../core/errors/failure.dart';
+import '../../../core/usecases/usecase.dart';
+import '../../../domain/entities/category_entity.dart';
+import '../../../domain/entities/category_save_req_entity.dart';
+import '../../../domain/entities/category_save_res_entity.dart';
+import '../../../domain/usecases/category/get_category_list_usecase.dart';
+import '../../../domain/usecases/category/save_category_usecase.dart';
 
 part 'category_event.dart';
-
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {

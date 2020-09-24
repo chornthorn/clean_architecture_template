@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:clean_architecture_templates/data/models/category/category_save_req_model.dart';
+import '../../data/data.dart';
 
 class CategorySaveReqEntity extends CategorySaveReqModel {
   String name;

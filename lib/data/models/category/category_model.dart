@@ -1,4 +1,4 @@
-import 'package:clean_architecture_templates/domain/entities/category_entity.dart';
+import '../../../domain/domain.dart';
 
 class CategoryModel extends CategoryEntity {
   CategoryModel({

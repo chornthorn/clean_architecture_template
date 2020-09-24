@@ -1,11 +1,8 @@
 import 'package:get_it/get_it.dart';
-import 'package:clean_architecture_templates/core/networks/http.dart';
-import 'package:clean_architecture_templates/data/datasources/remote/category_remote_data_source.dart';
-import 'package:clean_architecture_templates/data/repositories/category_repository_impl.dart';
-import 'package:clean_architecture_templates/domain/repositories/category_repository.dart';
-import 'package:clean_architecture_templates/domain/usecases/category/get_category_list_usecase.dart';
-import 'package:clean_architecture_templates/domain/usecases/category/save_category_usecase.dart';
-import 'package:clean_architecture_templates/view/blocs/category/category_bloc.dart';
+import '../core/core.dart';
+import '../data/data.dart';
+import '../domain/domain.dart';
+import '../view/view.dart';
 
 GetIt sl = GetIt.instance;
 

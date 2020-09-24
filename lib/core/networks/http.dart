@@ -1,6 +1,8 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import 'package:clean_architecture_templates/core/utils/path.dart';
+
+import '../utils/path.dart';
 
 class CustomHttp {
   dynamic getRequest({String path, String token}) async {

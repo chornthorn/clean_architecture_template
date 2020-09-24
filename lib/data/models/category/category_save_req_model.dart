@@ -1,5 +1,3 @@
-import 'package:clean_architecture_templates/domain/entities/category_save_req_entity.dart';
-
 class CategorySaveReqModel {
   CategorySaveReqModel({
     this.name,

@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../core/core.dart';
-import '../../domain.dart';
+import '../../entities/entities.dart';
+import '../../repositories/repositories.dart';
 
 class SaveCategoryListUseCase
     implements UseCase<CategorySaveResEntity, CategorySaveReqEntity> {

@@ -11,7 +11,7 @@ class AppIndex extends StatelessWidget {
       title: 'Material App',
       home: BlocProvider<CategoryBloc>(
         child: CategoryPage(),
-        create: (context) => sl<CategoryBloc>(),
+        create: (context) => sl<CategoryBloc>()..add(GetCategoryListEvent()),
       ),
     );
   }

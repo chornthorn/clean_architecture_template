@@ -13,14 +13,15 @@ abstract class CategoryRemoteDataSource {
 }
 
 class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
-  final CustomHttp customHttp;
+  final CustomHttp _customHttp;
 
-  CategoryRemoteDataSourceImpl({@required this.customHttp});
+  CategoryRemoteDataSourceImpl({@required CustomHttp customHttp})
+      : assert(customHttp != null),
+        _customHttp = customHttp;
 
   @override
   Future<List<CategoryEntity>> getCategoryList() async {
-    final response = await customHttp.getRequest(path: CATEGORY);
-    print(response);
+    final response = await _customHttp.getRequest(path: CATEGORY);
     return CategoryResultModel.fromJson(response).data;
   }
 
@@ -28,8 +29,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   Future<CategorySaveResEntity> saveCategory(
       CategorySaveReqModel reqModel) async {
     var body = json.encode(reqModel);
-    final response = await customHttp.postRequest(path: CATEGORY, body: body);
-    print(response);
+    final response = await _customHttp.postRequest(path: CATEGORY, body: body);
     return CategorySaveResModel.fromJson(response);
   }
 }

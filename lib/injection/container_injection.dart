@@ -19,8 +19,12 @@ Future<void> init() async {
   );
 
   // use case
-  sl.registerLazySingleton(() => GetCategoryListUseCase(sl()));
-  sl.registerLazySingleton(() => SaveCategoryListUseCase(sl()));
+  sl.registerLazySingleton(
+    () => GetCategoryListUseCase(categoryRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => SaveCategoryListUseCase(categoryRepository: sl()),
+  );
 
   // repository
   sl.registerLazySingleton<CategoryRepository>(

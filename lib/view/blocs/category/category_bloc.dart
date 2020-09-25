@@ -59,7 +59,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       Either<Failure, CategorySaveResEntity> failureOrCategory) async* {
     yield failureOrCategory.fold(
       (l) => CategoryFailureState('error'),
-      (r) => CategorySaveSuccess(r),
+      (r) {
+        return CategorySaveSuccess(r);
+      },
     );
   }
 }

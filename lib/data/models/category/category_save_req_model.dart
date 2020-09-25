@@ -4,6 +4,7 @@ class CategorySaveReqModel {
   });
 
   final String name;
+  int id;
 
   factory CategorySaveReqModel.fromJson(Map<String, dynamic> json) =>
       CategorySaveReqModel(

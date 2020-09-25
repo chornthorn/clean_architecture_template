@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:clean_architecture_templates/domain/usecases/category/update_category_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -16,16 +17,19 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     @required GetCategoryListUseCase getCategoryListUseCase,
     @required SaveCategoryListUseCase saveCategoryListUseCase,
     @required DeleteCategoryUseCase deleteCategoryUseCase,
+    @required UpdateCategoryUseCase updateCategoryUseCase,
   })  : assert(getCategoryListUseCase != null),
         assert(saveCategoryListUseCase != null),
         _getCategoryListUseCase = getCategoryListUseCase,
         _saveCategoryListUseCase = saveCategoryListUseCase,
         _deleteCategoryUseCase = deleteCategoryUseCase,
+        _updateCategoryUseCase = updateCategoryUseCase,
         super(CategoryInitial());
 
   final GetCategoryListUseCase _getCategoryListUseCase;
   final SaveCategoryListUseCase _saveCategoryListUseCase;
   final DeleteCategoryUseCase _deleteCategoryUseCase;
+  final UpdateCategoryUseCase _updateCategoryUseCase;
 
   @override
   Stream<CategoryState> mapEventToState(
@@ -55,6 +59,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       final failureOrCategory =
           await _deleteCategoryUseCase(categoryDeleteReqModel);
       yield* _eitherDeleteOrErrorState(failureOrCategory);
+    }
+    if (event is UpdateCategoryEvent) {
+      yield CategoryUpdating();
+      CategorySaveReqEntity categorySaveReqEntity =
+          CategorySaveReqEntity(name: event.data.name, id: event.data.id);
+      final failureOrCategory =
+          await _updateCategoryUseCase(categorySaveReqEntity);
+      yield* _eitherSaveOrErrorState(failureOrCategory);
     }
   }
 

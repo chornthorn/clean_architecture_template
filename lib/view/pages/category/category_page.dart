@@ -102,6 +102,9 @@ class _CategoryPageState extends State<CategoryPage> {
                             _deleteCategory(data.id);
                           },
                         ),
+                        onTap: () {
+                          _buildFormUpdateCategory(context, data);
+                        },
                       );
                     },
                   );
@@ -192,6 +195,77 @@ class _CategoryPageState extends State<CategoryPage> {
     );
   }
 
+  void _buildFormUpdateCategory(BuildContext context, CategoryEntity data) {
+    categoryName.text = data.name;
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Stack(
+            overflow: Overflow.visible,
+            children: <Widget>[
+              Positioned(
+                right: -40.0,
+                top: -40.0,
+                child: InkResponse(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: CircleAvatar(
+                    child: Icon(Icons.close),
+                    backgroundColor: Colors.red,
+                  ),
+                ),
+              ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: Colors.grey),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: TextFormField(
+                          controller: categoryName,
+                          decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 10),
+                              hintText: 'Category name',
+                              border: InputBorder.none),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RaisedButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                        color: Colors.blue,
+                        child: Text(
+                          "update",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            _updateCategory(data.id);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   void _saveCategory() {
     CategorySaveReqEntity data = CategorySaveReqEntity();
     data.name = categoryName.text;
@@ -209,6 +283,18 @@ class _CategoryPageState extends State<CategoryPage> {
     BlocProvider.of<CategoryBloc>(context).add(
       DeleteCategoryEvent(data: data),
     );
+
+    BlocProvider.of<CategoryBloc>(context).add(GetCategoryListEvent());
+  }
+
+  void _updateCategory(int id) {
+    CategorySaveReqEntity data = CategorySaveReqEntity();
+    data.name = categoryName.text;
+    data.id = id;
+    BlocProvider.of<CategoryBloc>(context).add(
+      UpdateCategoryEvent(data: data),
+    );
+    Navigator.of(context).pop();
 
     BlocProvider.of<CategoryBloc>(context).add(GetCategoryListEvent());
   }

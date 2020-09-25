@@ -56,3 +56,8 @@ class CategoryDeleteSuccess extends CategoryState {
   @override
   List<Object> get props => [categoryDeleteResEntity];
 }
+
+class CategoryUpdating extends CategoryState {
+  @override
+  List<Object> get props => [];
+}

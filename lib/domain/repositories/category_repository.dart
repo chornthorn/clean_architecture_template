@@ -7,7 +7,9 @@ import '../domain.dart';
 abstract class CategoryRepository {
   Future<Either<Failure, List<CategoryEntity>>> getCategories();
   Future<Either<Failure, CategorySaveResEntity>> saveCategory(
-      CategorySaveReqModel reqEntity);
+      CategorySaveReqEntity reqEntity);
   Future<Either<Failure, CategoryDeleteResEntity>> deleteCategory(
-      CategoryDeleteReqModel reqEntity);
+      CategoryDeleteReqEntity reqEntity);
+  Future<Either<Failure, CategorySaveResEntity>> updateCategory(
+      CategorySaveReqEntity reqEntity);
 }

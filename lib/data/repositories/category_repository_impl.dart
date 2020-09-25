@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import '../../core/core.dart';
 import '../../domain/domain.dart';
 import '../datasources/datasources.dart';
-import '../models/models.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository {
   final CategoryRemoteDataSource _categoryRemoteDataSource;
@@ -26,9 +25,9 @@ class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
   Future<Either<Failure, CategorySaveResEntity>> saveCategory(
-      CategorySaveReqModel reqModel) async {
+      CategorySaveReqEntity reqEntity) async {
     try {
-      final category = await _categoryRemoteDataSource.store(reqModel);
+      final category = await _categoryRemoteDataSource.store(reqEntity);
       return Right(category);
     } on ServerException {
       return Left(ServerFailure());
@@ -37,9 +36,20 @@ class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
   Future<Either<Failure, CategoryDeleteResEntity>> deleteCategory(
-      CategoryDeleteReqModel reqModel) async {
+      CategoryDeleteReqEntity reqEntity) async {
     try {
-      final result = await _categoryRemoteDataSource.delete(reqModel);
+      final result = await _categoryRemoteDataSource.delete(reqEntity);
+      return Right(result);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, CategorySaveResEntity>> updateCategory(
+      CategorySaveReqEntity reqEntity) async {
+    try {
+      final result = await _categoryRemoteDataSource.update(reqEntity);
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());

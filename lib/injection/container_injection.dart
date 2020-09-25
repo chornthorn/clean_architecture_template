@@ -16,6 +16,7 @@ Future<void> init() async {
       getCategoryListUseCase: sl(),
       saveCategoryListUseCase: sl(),
       deleteCategoryUseCase: sl(),
+      updateCategoryUseCase: sl(),
     ),
   );
 
@@ -29,7 +30,9 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => DeleteCategoryUseCase(categoryRepository: sl()),
   );
-
+  sl.registerLazySingleton(
+    () => UpdateCategoryUseCase(categoryRepository: sl()),
+  );
   // repository
   sl.registerLazySingleton<CategoryRepository>(
     () => CategoryRepositoryImpl(categoryRemoteDataSource: sl()),

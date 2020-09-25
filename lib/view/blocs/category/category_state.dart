@@ -43,3 +43,16 @@ class CategorySaveSuccess extends CategoryState {
   @override
   List<Object> get props => [categorySaveResEntity];
 }
+
+class CategoryDeleting extends CategoryState {
+  @override
+  List<Object> get props => [];
+}
+
+class CategoryDeleteSuccess extends CategoryState {
+  final CategoryDeleteResEntity categoryDeleteResEntity;
+
+  CategoryDeleteSuccess(this.categoryDeleteResEntity);
+  @override
+  List<Object> get props => [categoryDeleteResEntity];
+}

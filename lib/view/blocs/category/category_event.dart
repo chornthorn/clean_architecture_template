@@ -16,3 +16,11 @@ class SaveCategoryEvent extends CategoryEvent {
   @override
   List<Object> get props => [data];
 }
+
+class DeleteCategoryEvent extends CategoryEvent {
+  final CategoryDeleteReqEntity data;
+
+  DeleteCategoryEvent({this.data});
+  @override
+  List<Object> get props => [data];
+}

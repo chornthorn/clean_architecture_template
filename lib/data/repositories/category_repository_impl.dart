@@ -34,4 +34,15 @@ class CategoryRepositoryImpl extends CategoryRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, CategoryDeleteResEntity>> deleteCategory(
+      CategoryDeleteReqModel reqEntity) async {
+    try {
+      final result = await _categoryRemoteDataSource.deleteCategory(reqEntity);
+      return Right(result);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

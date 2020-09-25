@@ -10,6 +10,8 @@ abstract class CategoryRemoteDataSource {
   Future<List<CategoryEntity>> getCategoryList();
   Future<CategorySaveResEntity> saveCategory(
       CategorySaveReqModel categorySaveReqModel);
+  Future<CategoryDeleteResEntity> deleteCategory(
+      CategoryDeleteReqEntity categoryDeleteReqEntity);
 }
 
 class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
@@ -31,5 +33,13 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
     var body = json.encode(reqModel);
     final response = await _customHttp.postRequest(path: CATEGORY, body: body);
     return CategorySaveResModel.fromJson(response);
+  }
+
+  @override
+  Future<CategoryDeleteResEntity> deleteCategory(
+      CategoryDeleteReqEntity categoryDeleteReqEntity) async {
+    var id = categoryDeleteReqEntity.id;
+    final response = await _customHttp.deleteRequest(path: '$CATEGORY/$id');
+    return CategoryDeleteResModel.fromJson(response);
   }
 }

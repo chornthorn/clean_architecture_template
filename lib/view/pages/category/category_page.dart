@@ -61,7 +61,17 @@ class _CategoryPageState extends State<CategoryPage> {
                 if (state is CategorySaveSuccess) {
                   Scaffold.of(context).showSnackBar(
                     new SnackBar(
-                      content: new Text('Save Successfully!'),
+                      content:
+                          new Text(state.categorySaveResEntity.statusMessage),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                }
+                if (state is CategoryDeleteSuccess) {
+                  Scaffold.of(context).showSnackBar(
+                    new SnackBar(
+                      content:
+                          new Text(state.categoryDeleteResEntity.statusMessage),
                       backgroundColor: Colors.green,
                     ),
                   );
@@ -86,7 +96,12 @@ class _CategoryPageState extends State<CategoryPage> {
                       var data = state.categoryEntity[index];
                       return ListTile(
                         title: Text(data.name),
-                        onLongPress: () {},
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            _deleteCategory(data.id);
+                          },
+                        ),
                       );
                     },
                   );
@@ -184,6 +199,16 @@ class _CategoryPageState extends State<CategoryPage> {
       SaveCategoryEvent(data: data),
     );
     Navigator.of(context).pop();
+
+    BlocProvider.of<CategoryBloc>(context).add(GetCategoryListEvent());
+  }
+
+  void _deleteCategory(int id) {
+    CategoryDeleteReqEntity data = CategoryDeleteReqEntity();
+    data.id = id;
+    BlocProvider.of<CategoryBloc>(context).add(
+      DeleteCategoryEvent(data: data),
+    );
 
     BlocProvider.of<CategoryBloc>(context).add(GetCategoryListEvent());
   }

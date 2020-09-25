@@ -12,17 +12,20 @@ part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  CategoryBloc(
-      {@required GetCategoryListUseCase getCategoryListUseCase,
-      @required SaveCategoryListUseCase saveCategoryListUseCase})
-      : assert(getCategoryListUseCase != null),
+  CategoryBloc({
+    @required GetCategoryListUseCase getCategoryListUseCase,
+    @required SaveCategoryListUseCase saveCategoryListUseCase,
+    @required DeleteCategoryUseCase deleteCategoryUseCase,
+  })  : assert(getCategoryListUseCase != null),
         assert(saveCategoryListUseCase != null),
         _getCategoryListUseCase = getCategoryListUseCase,
         _saveCategoryListUseCase = saveCategoryListUseCase,
+        _deleteCategoryUseCase = deleteCategoryUseCase,
         super(CategoryInitial());
 
   final GetCategoryListUseCase _getCategoryListUseCase;
   final SaveCategoryListUseCase _saveCategoryListUseCase;
+  final DeleteCategoryUseCase _deleteCategoryUseCase;
 
   @override
   Stream<CategoryState> mapEventToState(
@@ -45,6 +48,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       //   (r) => CategorySaveSuccess(r),
       // );
     }
+    if (event is DeleteCategoryEvent) {
+      yield CategoryDeleting();
+      CategoryDeleteReqEntity categoryDeleteReqModel =
+          CategoryDeleteReqEntity(id: event.data.id);
+      final failureOrCategory =
+          await _deleteCategoryUseCase(categoryDeleteReqModel);
+      yield* _eitherDeleteOrErrorState(failureOrCategory);
+    }
   }
 
   Stream<CategoryState> _eitherLoadedOrErrorState(
@@ -62,6 +73,14 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
       (r) {
         return CategorySaveSuccess(r);
       },
+    );
+  }
+
+  Stream<CategoryState> _eitherDeleteOrErrorState(
+      Either<Failure, CategoryDeleteResEntity> failureOrCategory) async* {
+    yield failureOrCategory.fold(
+      (l) => CategoryFailureState('error'),
+      (r) => CategoryDeleteSuccess(r),
     );
   }
 }

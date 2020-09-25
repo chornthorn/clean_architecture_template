@@ -15,6 +15,7 @@ Future<void> init() async {
     () => CategoryBloc(
       getCategoryListUseCase: sl(),
       saveCategoryListUseCase: sl(),
+      deleteCategoryUseCase: sl(),
     ),
   );
 
@@ -24,6 +25,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(
     () => SaveCategoryListUseCase(categoryRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => DeleteCategoryUseCase(categoryRepository: sl()),
   );
 
   // repository

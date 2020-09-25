@@ -8,4 +8,6 @@ abstract class CategoryRepository {
   Future<Either<Failure, List<CategoryEntity>>> getCategories();
   Future<Either<Failure, CategorySaveResEntity>> saveCategory(
       CategorySaveReqModel reqEntity);
+  Future<Either<Failure, CategoryDeleteResEntity>> deleteCategory(
+      CategoryDeleteReqModel reqEntity);
 }

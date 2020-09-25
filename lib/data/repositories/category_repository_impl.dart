@@ -17,7 +17,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   @override
   Future<Either<Failure, List<CategoryEntity>>> getCategories() async {
     try {
-      final category = await _categoryRemoteDataSource.getCategoryList();
+      final category = await _categoryRemoteDataSource.index();
       return Right(category);
     } on ServerException {
       return Left(ServerFailure());
@@ -28,7 +28,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   Future<Either<Failure, CategorySaveResEntity>> saveCategory(
       CategorySaveReqModel reqEntity) async {
     try {
-      final category = await _categoryRemoteDataSource.saveCategory(reqEntity);
+      final category = await _categoryRemoteDataSource.store(reqEntity);
       return Right(category);
     } on ServerException {
       return Left(ServerFailure());
@@ -39,7 +39,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   Future<Either<Failure, CategoryDeleteResEntity>> deleteCategory(
       CategoryDeleteReqModel reqEntity) async {
     try {
-      final result = await _categoryRemoteDataSource.deleteCategory(reqEntity);
+      final result = await _categoryRemoteDataSource.delete(reqEntity);
       return Right(result);
     } on ServerException {
       return Left(ServerFailure());

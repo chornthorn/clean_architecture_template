@@ -36,8 +36,8 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
 
   @override
   Future<CategoryDeleteResEntity> delete(
-      CategoryDeleteReqEntity categoryDeleteReqEntity) async {
-    var id = categoryDeleteReqEntity.id;
+      CategoryDeleteReqModel categoryDeleteReqModel) async {
+    var id = categoryDeleteReqModel.id;
     final response = await _customHttp.deleteRequest(path: '$CATEGORY/$id');
     return CategoryDeleteResModel.fromJson(response);
   }

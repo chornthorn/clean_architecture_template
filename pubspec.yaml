@@ -18,8 +18,6 @@ dependencies:
   dartz: ^0.9.1
   get_it: ^4.0.4
   http: ^0.12.2
-  data_connection_checker: ^0.3.4
-  shared_preferences: ^0.5.10
 
 dev_dependencies:
   flutter_test:

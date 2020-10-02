@@ -1,3 +1,4 @@
+import 'package:clean_architecture_templates/view/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,113 +17,84 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Category Page'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // BlocListener<CategoryBloc, CategoryState>(
-            //   listener: (context, state) {
-            //     if (state is CategorySaveSuccess) {
-            //       Scaffold.of(context).showSnackBar(
-            //         new SnackBar(
-            //           content: new Text('Save Successfully!'),
-            //           backgroundColor: Colors.green,
-            //         ),
-            //       );
-            //     }
-            //   },
-            //   child: BlocBuilder<CategoryBloc, CategoryState>(
-            //       builder: (context, state) {
-            //     if (state is CategoryLoading) {
-            //       return Center(child: CircularProgressIndicator());
-            //     }
-            //     if (state is CategoryLoaded) {
-            //       return ListView.builder(
-            //         shrinkWrap: true,
-            //         physics: NeverScrollableScrollPhysics(),
-            //         itemCount: state.categoryEntity.length,
-            //         itemBuilder: (context, index) {
-            //           var data = state.categoryEntity[index];
-            //           return ListTile(
-            //             title: Text(data.name),
-            //             onLongPress: () {},
-            //           );
-            //         },
-            //       );
-            //     }
-            //     return Container();
-            //   }),
-            // ),
-            BlocConsumer<CategoryBloc, CategoryState>(
-              listener: (context, state) {
-                if (state is CategorySaveSuccess) {
-                  Scaffold.of(context).showSnackBar(
-                    new SnackBar(
-                      content:
-                          new Text(state.categorySaveResEntity.statusMessage),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-                if (state is CategoryDeleteSuccess) {
-                  Scaffold.of(context).showSnackBar(
-                    new SnackBar(
-                      content:
-                          new Text(state.categoryDeleteResEntity.statusMessage),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is CategoryLoading) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Center(child: CircularProgressIndicator()),
-                    ],
-                  );
-                }
-                if (state is CategoryLoaded) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: state.categoryEntity.length,
-                    itemBuilder: (context, index) {
-                      var data = state.categoryEntity[index];
-                      return ListTile(
-                        title: Text(data.name),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete, color: Colors.red),
-                          onPressed: () {
-                            _deleteCategory(data.id);
-                          },
+    return PlatformWidget(mobile: (context) {
+      return ResponsiveWidget(
+        portraitLayout: Scaffold(
+          appBar: AppBar(
+            title: Text('Category Page'),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                BlocConsumer<CategoryBloc, CategoryState>(
+                  listener: (context, state) {
+                    if (state is CategorySaveSuccess) {
+                      Scaffold.of(context).showSnackBar(
+                        new SnackBar(
+                          content: new Text(
+                              state.categorySaveResEntity.statusMessage),
+                          backgroundColor: Colors.green,
                         ),
-                        onTap: () {
-                          _buildFormUpdateCategory(context, data);
+                      );
+                    }
+                    if (state is CategoryDeleteSuccess) {
+                      Scaffold.of(context).showSnackBar(
+                        new SnackBar(
+                          content: new Text(
+                              state.categoryDeleteResEntity.statusMessage),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is CategoryLoading) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(child: CircularProgressIndicator()),
+                        ],
+                      );
+                    }
+                    if (state is CategoryLoaded) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: state.categoryEntity.length,
+                        itemBuilder: (context, index) {
+                          var data = state.categoryEntity[index];
+                          return ListTile(
+                            title: Text(data.name),
+                            trailing: IconButton(
+                              icon: Icon(Icons.delete, color: Colors.red),
+                              onPressed: () {
+                                _deleteCategory(data.id);
+                              },
+                            ),
+                            onTap: () {
+                              _buildFormUpdateCategory(context, data);
+                            },
+                          );
                         },
                       );
-                    },
-                  );
-                }
-                return Container();
-              },
+                    }
+                    return Container();
+                  },
+                ),
+              ],
             ),
-          ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              categoryName.clear();
+              _buildFormCategory(context);
+            },
+            child: Icon(Icons.add),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          categoryName.clear();
-          _buildFormCategory(context);
-        },
-        child: Icon(Icons.add),
-      ),
-    );
+      );
+    });
   }
 
   void _buildFormCategory(BuildContext context) {

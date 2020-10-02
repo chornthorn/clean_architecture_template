@@ -18,6 +18,7 @@ dependencies:
   dartz: ^0.9.1
   get_it: ^4.0.4
   http: ^0.12.2
+  device_preview: ^0.4.8
 
 dev_dependencies:
   flutter_test:

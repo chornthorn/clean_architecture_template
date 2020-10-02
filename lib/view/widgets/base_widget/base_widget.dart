@@ -1,5 +1,6 @@
-import 'package:clean_architecture_templates/core/core.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/core.dart';
 
 class BaseWidget extends StatelessWidget {
   final Widget Function(
